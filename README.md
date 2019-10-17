@@ -16,7 +16,7 @@ We have the following form model:
 
 ```
 const myFormValues = {
-  product : 'shoes',
+  product: 'shoes',
   price: 20,
 }
 ```
@@ -27,7 +27,9 @@ We can add a previousDate validation to the myFormValues
 import { previousDate } from '@lemoncode/fonk-previous-date-validator';
 
 const validationSchema = {
-  price: [previousDate.validator],
+  field: {
+    price: [previousDate.validator],
+  },
 };
 ```
 
@@ -47,12 +49,14 @@ previousDate.setErrorMessage('El campo debe de ser numérico');
 import { previousDate } from '@lemoncode/fonk-previous-date-validator';
 
 const validationSchema = {
-  price: [
-    {
-      validator: previousDate.validator,
-      message: 'Error message only updated for the validation schema',
-    },
-  ],
+  field: {
+    price: [
+      {
+        validator: previousDate.validator,
+        message: 'Error message only updated for the validation schema',
+      },
+    ],
+  },
 };
 ```
 
