@@ -37,10 +37,7 @@ export const validator: FieldValidationFunctionSync<CustomArgs> = ({
     succeeded,
     message: succeeded
       ? ''
-      : parseMessageWithCustomArgs(
-          (message as string) || defaultMessage,
-          customArgs
-        ),
+      : parseMessageWithCustomArgs(message as string, customArgs),
     type: VALIDATOR_TYPE,
   };
 };
