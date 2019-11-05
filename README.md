@@ -6,8 +6,6 @@
 
 This is a [fonk](https://github.com/Lemoncode/fonk) microlibrary that brings validation capabilities to:
 
-// TODO: Update description and example.
-
 - Validate if a field of a form is previous to a certain date.
 
 How to install it:
