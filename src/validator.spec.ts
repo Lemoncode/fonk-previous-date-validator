@@ -17,7 +17,7 @@ describe('fonk-previous-date-validator specs', () => {
 
     it('should return succeeded validation when value is a valid Date object earlier than customArgs date param', () => {
       const value = new Date(2018, 11, 24, 10, 33, 30, 0);
-      const date = new Date(2018, 12, 30, 15, 33, 30, 0);
+      const date = new Date(2018, 11, 30, 15, 33, 30, 0);
 
       const result = validator({ value, customArgs: { date } });
 
@@ -55,8 +55,8 @@ describe('fonk-previous-date-validator specs', () => {
     });
 
     it('should return succeeded validation when value is a valid Date object with year and month earlier than customArgs date param', () => {
-      const value = new Date(2018, 11);
-      const date = new Date(2018, 12);
+      const value = new Date(2018, 10);
+      const date = new Date(2018, 11);
 
       const result = validator({ value, customArgs: { date } });
 
@@ -94,8 +94,8 @@ describe('fonk-previous-date-validator specs', () => {
     });
 
     it('should return succeeded validation when value is a valid Date object with year, month, days, hours and minutes earlier than customArgs date param', () => {
-      const value = new Date(2018, 11, 24, 10, 15);
-      const date = new Date(2018, 12, 24, 10, 33);
+      const value = new Date(2018, 10, 24, 10, 15);
+      const date = new Date(2018, 11, 24, 10, 33);
 
       const result = validator({ value, customArgs: { date } });
 
@@ -107,8 +107,8 @@ describe('fonk-previous-date-validator specs', () => {
     });
 
     it('should return succeeded validation when value is a valid Date object year, month, days, hours, minutes and seconds earlier than customArgs date param', () => {
-      const value = new Date(2018, 12, 30, 15, 33, 30);
-      const date = new Date(2018, 12, 30, 15, 33, 45);
+      const value = new Date(2018, 9, 30, 15, 33, 30);
+      const date = new Date(2018, 9, 30, 15, 33, 45);
 
       const result = validator({ value, customArgs: { date } });
 
@@ -120,8 +120,8 @@ describe('fonk-previous-date-validator specs', () => {
     });
 
     it('should return succeeded validation when value is a valid Date object year, month, days, hours, minutes, seconds and milliseconds earlier than customArgs date param', () => {
-      const value = new Date(2018, 12, 30, 15, 33, 45, 2);
-      const date = new Date(2018, 12, 30, 15, 33, 45, 6);
+      const value = new Date(2018, 9, 30, 15, 33, 45, 2);
+      const date = new Date(2018, 9, 30, 15, 33, 45, 6);
 
       const result = validator({ value, customArgs: { date } });
 
@@ -134,7 +134,7 @@ describe('fonk-previous-date-validator specs', () => {
 
     it('should return failed validation when value is a valid Date object later than customArgs date param', () => {
       const value = new Date(2019, 11, 24, 10, 33, 30, 0);
-      const date = new Date(2018, 12, 30, 15, 33, 30, 0);
+      const date = new Date('December 24, 2018 10:33:00');
 
       const result = validator({ value, customArgs: { date } });
 
@@ -145,42 +145,48 @@ describe('fonk-previous-date-validator specs', () => {
       });
     });
 
-    it('should throw an error when it feeds value equals undefined', () => {
-      const value = undefined;
-      const date = new Date(2018, 12, 30, 15, 33, 30, 0);
-      const validatorArgs = { value, customArgs: { date } };
+    it('should return succeeded validation when it feeds value equals undefined', () => {
+      const value = void 0;
+      const date = new Date(2018, 11, 30, 15, 33, 30, 0);
 
-      expect(() => validator(validatorArgs)).toThrow(TypeError);
-      expect(() => validator(validatorArgs)).toThrowError(
-        'Value must be a valid Date object'
-      );
+      const result = validator({ value, customArgs: { date } });
+
+      expect(result).toEqual({
+        succeeded: true,
+        message: '',
+        type: 'PREVIOUS_DATE',
+      });
     });
 
-    it('should throw an error when it feeds value equals null', () => {
+    it('should return succeeded validation when it feeds value equals null', () => {
       const value = null;
-      const date = new Date(2018, 12, 30, 15, 33, 30, 0);
-      const validatorArgs = { value, customArgs: { date } };
+      const date = new Date(2018, 11, 30, 15, 33, 30, 0);
 
-      expect(() => validator(validatorArgs)).toThrow(TypeError);
-      expect(() => validator(validatorArgs)).toThrowError(
-        'Value must be a valid Date object'
-      );
+      const result = validator({ value, customArgs: { date } });
+
+      expect(result).toEqual({
+        succeeded: true,
+        message: '',
+        type: 'PREVIOUS_DATE',
+      });
     });
 
-    it('should throw an error when it feeds value equals empty string', () => {
+    it('should return succeeded validation when it feeds value equals empty string', () => {
       const value = '';
-      const date = new Date(2018, 12, 30, 15, 33, 30, 0);
-      const validatorArgs = { value, customArgs: { date } };
+      const date = new Date(2018, 11, 30, 15, 33, 30, 0);
 
-      expect(() => validator(validatorArgs)).toThrow(TypeError);
-      expect(() => validator(validatorArgs)).toThrowError(
-        'Value must be a valid Date object'
-      );
+      const result = validator({ value, customArgs: { date } });
+
+      expect(result).toEqual({
+        succeeded: true,
+        message: '',
+        type: 'PREVIOUS_DATE',
+      });
     });
 
     it('should overwrite default message when it feeds value and message', () => {
       const value = new Date(2020, 11, 24, 10, 33, 30, 0);
-      const date = new Date(2018, 12, 30, 15, 33, 30, 0);
+      const date = new Date(2018, 11, 30, 15, 33, 30, 0);
       const message = 'other message';
 
       const result = validator({ value, message, customArgs: { date } });
@@ -193,8 +199,8 @@ describe('fonk-previous-date-validator specs', () => {
     });
 
     it('should overwrite default message when it feeds value and calls to setErrorMessage', () => {
-      const value = new Date(2020, 11, 24, 10, 33, 30, 0);
-      const date = new Date(2018, 12, 30, 15, 33, 30, 0);
+      const value = new Date(2020, 10, 24, 10, 33, 30, 0);
+      const date = new Date(2018, 11, 30, 15, 33, 30, 0);
       setErrorMessage('other message');
 
       const result = validator({ value, customArgs: { date } });
@@ -206,6 +212,7 @@ describe('fonk-previous-date-validator specs', () => {
       });
     });
   });
+
   describe('CustomParams boundaries', () => {
     it('Should throw an error if customArgs are not provided', () => {
       const value = new Date(2018, 11, 24, 10, 33, 30, 0);
