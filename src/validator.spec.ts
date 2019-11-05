@@ -132,9 +132,113 @@ describe('fonk-previous-date-validator specs', () => {
       });
     });
 
-    it('should return failed validation when value is a valid Date object later than customArgs date param', () => {
+    it('should return failed validation when value is a valid Date object later than customArgs date param string format', () => {
       const value = new Date(2019, 11, 24, 10, 33, 30, 0);
       const date = new Date('December 24, 2018 10:33:00');
+
+      const result = validator({ value, customArgs: { date } });
+
+      expect(result).toEqual({
+        succeeded: false,
+        message: "Date isn't previous to the one provided.",
+        type: 'PREVIOUS_DATE',
+      });
+    });
+
+    it('should return failed validation when value is a valid Date object with year earlier than customArgs date param', () => {
+      const value = new Date(2019);
+      const date = new Date(2018);
+
+      const result = validator({ value, customArgs: { date } });
+
+      expect(result).toEqual({
+        succeeded: false,
+        message: "Date isn't previous to the one provided.",
+        type: 'PREVIOUS_DATE',
+      });
+    });
+
+    it('should return failed validation when value is a valid Date object with year and month earlier than customArgs date param', () => {
+      const value = new Date(2018, 2);
+      const date = new Date(2018, 1);
+
+      const result = validator({ value, customArgs: { date } });
+
+      expect(result).toEqual({
+        succeeded: false,
+        message: "Date isn't previous to the one provided.",
+        type: 'PREVIOUS_DATE',
+      });
+    });
+
+    it('should return failed validation when value is a valid Date object with year, month and days earlier than customArgs date param', () => {
+      const value = new Date(2018, 11, 21);
+      const date = new Date(2018, 11, 10);
+
+      const result = validator({ value, customArgs: { date } });
+
+      expect(result).toEqual({
+        succeeded: false,
+        message: "Date isn't previous to the one provided.",
+        type: 'PREVIOUS_DATE',
+      });
+    });
+
+    it('should return failed validation when value is a valid Date object with year, month, days and hours earlier than customArgs date param', () => {
+      const value = new Date(2018, 11, 30, 21);
+      const date = new Date(2018, 11, 30, 15);
+
+      const result = validator({ value, customArgs: { date } });
+
+      expect(result).toEqual({
+        succeeded: false,
+        message: "Date isn't previous to the one provided.",
+        type: 'PREVIOUS_DATE',
+      });
+    });
+
+    it('should return failed validation when value is a valid Date object with year, month, days, hours and minutes later than customArgs date param', () => {
+      const value = new Date(2018, 10, 24, 10, 45);
+      const date = new Date(2018, 10, 24, 10, 24);
+
+      const result = validator({ value, customArgs: { date } });
+
+      expect(result).toEqual({
+        succeeded: false,
+        message: "Date isn't previous to the one provided.",
+        type: 'PREVIOUS_DATE',
+      });
+    });
+
+    it('should return failed validation when value is a valid Date object year, month, days, hours, minutes and seconds later than customArgs date param', () => {
+      const value = new Date(2018, 9, 30, 15, 33, 34);
+      const date = new Date(2018, 9, 30, 15, 33, 17);
+
+      const result = validator({ value, customArgs: { date } });
+
+      expect(result).toEqual({
+        succeeded: false,
+        message: "Date isn't previous to the one provided.",
+        type: 'PREVIOUS_DATE',
+      });
+    });
+
+    it('should return failed validation when value is a valid Date object year, month, days, hours, minutes, seconds and milliseconds later than customArgs date param', () => {
+      const value = new Date(2018, 9, 30, 15, 33, 45, 45);
+      const date = new Date(2018, 9, 30, 15, 33, 45, 6);
+
+      const result = validator({ value, customArgs: { date } });
+
+      expect(result).toEqual({
+        succeeded: false,
+        message: "Date isn't previous to the one provided.",
+        type: 'PREVIOUS_DATE',
+      });
+    });
+
+    it('should return failed validation when value is a valid Date object later than customArgs date param by 1 millisecond', () => {
+      const value = new Date(2019, 11, 24, 10, 33, 30, 1);
+      const date = new Date(2019, 11, 24, 10, 33, 30, 0);
 
       const result = validator({ value, customArgs: { date } });
 
