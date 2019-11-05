@@ -21,7 +21,7 @@ We have the following form model:
 ```
 const myFormValues = {
   product: 'shoes',
-  purchaseDate: new Date(),
+  purchaseDate: new Date('2019-02-10'),
 }
 ```
 
@@ -32,7 +32,12 @@ import { previousDate } from '@lemoncode/fonk-previous-date-validator';
 
 const validationSchema = {
   field: {
-    purchaseDate: [previousDate.validator],
+    purchaseDate: [
+      {
+        validator: previousDate.validator,
+        customArgs: { date: new Date('2019-03-10') },
+      },
+    ],
   },
 };
 ```
@@ -58,6 +63,7 @@ const validationSchema = {
       {
         validator: previousDate.validator,
         message: 'Error message only updated for the validation schema',
+        customArgs: { date: new Date('2019-03-10') },
       },
     ],
   },
