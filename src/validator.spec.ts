@@ -1,5 +1,8 @@
 import { setErrorMessage, validator } from './validator';
 
+const VALIDATOR_TYPE = 'PREVIOUS_DATE';
+const VALIDATOR_MESSAGE = "Date isn't previous to the one provided.";
+
 describe('fonk-previous-date-validator specs', () => {
   describe('Date option boundaries', () => {
     it('should return succeeded validation when value is a valid Date object earlier than actual Date', () => {
@@ -11,7 +14,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -24,7 +27,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -37,7 +40,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -50,7 +53,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -63,7 +66,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -76,7 +79,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -89,7 +92,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -102,7 +105,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -115,7 +118,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -128,7 +131,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -140,8 +143,8 @@ describe('fonk-previous-date-validator specs', () => {
 
       expect(result).toEqual({
         succeeded: false,
-        message: "Date isn't previous to the one provided.",
-        type: 'PREVIOUS_DATE',
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -153,8 +156,8 @@ describe('fonk-previous-date-validator specs', () => {
 
       expect(result).toEqual({
         succeeded: false,
-        message: "Date isn't previous to the one provided.",
-        type: 'PREVIOUS_DATE',
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -166,8 +169,8 @@ describe('fonk-previous-date-validator specs', () => {
 
       expect(result).toEqual({
         succeeded: false,
-        message: "Date isn't previous to the one provided.",
-        type: 'PREVIOUS_DATE',
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -179,8 +182,8 @@ describe('fonk-previous-date-validator specs', () => {
 
       expect(result).toEqual({
         succeeded: false,
-        message: "Date isn't previous to the one provided.",
-        type: 'PREVIOUS_DATE',
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -192,8 +195,8 @@ describe('fonk-previous-date-validator specs', () => {
 
       expect(result).toEqual({
         succeeded: false,
-        message: "Date isn't previous to the one provided.",
-        type: 'PREVIOUS_DATE',
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -205,8 +208,8 @@ describe('fonk-previous-date-validator specs', () => {
 
       expect(result).toEqual({
         succeeded: false,
-        message: "Date isn't previous to the one provided.",
-        type: 'PREVIOUS_DATE',
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -218,8 +221,8 @@ describe('fonk-previous-date-validator specs', () => {
 
       expect(result).toEqual({
         succeeded: false,
-        message: "Date isn't previous to the one provided.",
-        type: 'PREVIOUS_DATE',
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -231,8 +234,8 @@ describe('fonk-previous-date-validator specs', () => {
 
       expect(result).toEqual({
         succeeded: false,
-        message: "Date isn't previous to the one provided.",
-        type: 'PREVIOUS_DATE',
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -244,8 +247,8 @@ describe('fonk-previous-date-validator specs', () => {
 
       expect(result).toEqual({
         succeeded: false,
-        message: "Date isn't previous to the one provided.",
-        type: 'PREVIOUS_DATE',
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -258,7 +261,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -271,20 +274,87 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
     it('should return succeeded validation when it feeds value equals empty string', () => {
       const value = '';
-      const date = new Date(2018, 11, 30, 15, 33, 30, 0);
+      const customArgs = {
+        date: new Date(2018, 11, 30, 15, 33, 30, 0),
+        parseStringToDate: (value: string) => new Date(value),
+      };
 
-      const result = validator({ value, customArgs: { date } });
+      const result = validator({ value, customArgs });
 
       expect(result).toEqual({
         succeeded: true,
         message: '',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
+      });
+    });
+
+    it('should return failed validation when it feeds value equals string with letters and numbers', () => {
+      const value = 'test1234';
+      const customArgs = {
+        date: new Date('2018-11-30T15:30:00'),
+        parseStringToDate: (value: string) => new Date(value),
+      };
+
+      const result = validator({ value, customArgs });
+
+      expect(result).toEqual({
+        succeeded: false,
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
+      });
+    });
+
+    it('should return failed validation when it feeds value equals string with invalid format date', () => {
+      const value = '14:00:00 30-11-2018';
+      const customArgs = {
+        date: new Date('2018-11-30T15:30:00'),
+        parseStringToDate: (value: string) => new Date(value),
+      };
+
+      const result = validator({ value, customArgs });
+
+      expect(result).toEqual({
+        succeeded: false,
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
+      });
+    });
+
+    it('should return failed validation when it feeds value equals string with valid format date and is not previous date', () => {
+      const value = '2018-11-30 16:00:00';
+      const customArgs = {
+        date: new Date('2018-11-30T15:30:00'),
+        parseStringToDate: (value: string) => new Date(value),
+      };
+
+      const result = validator({ value, customArgs });
+
+      expect(result).toEqual({
+        succeeded: false,
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
+      });
+    });
+
+    it('should return succeded validation when it feeds value equals string with valid format date and is previous date', () => {
+      const value = '2018-11-30 14:00:00';
+      const customArgs = {
+        date: new Date('2018-11-30T15:30:00'),
+        parseStringToDate: (value: string) => new Date(value),
+      };
+
+      const result = validator({ value, customArgs });
+
+      expect(result).toEqual({
+        succeeded: true,
+        message: '',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -298,7 +368,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: false,
         message: 'other message',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
 
@@ -312,7 +382,7 @@ describe('fonk-previous-date-validator specs', () => {
       expect(result).toEqual({
         succeeded: false,
         message: 'other message',
-        type: 'PREVIOUS_DATE',
+        type: VALIDATOR_TYPE,
       });
     });
   });
@@ -320,11 +390,44 @@ describe('fonk-previous-date-validator specs', () => {
   describe('CustomParams boundaries', () => {
     it('Should throw an error if customArgs are not provided', () => {
       const value = new Date(2018, 11, 24, 10, 33, 30, 0);
-      const validatorArgs = { value };
 
-      expect(() => validator(validatorArgs)).toThrow(Error);
-      expect(() => validator(validatorArgs)).toThrowError(
+      expect(() => validator({ value })).toThrow(Error);
+      expect(() =>
+        validator({ value, customArgs: { date: void 0 } })
+      ).toThrowError(
         'FieldValidationError: date custom arg is mandatory. Example: { customArgs: { date: new Date() } }.'
+      );
+    });
+
+    it('Should throw an error if customArgs.date is not provided', () => {
+      const value = new Date(2018, 11, 24, 10, 33, 30, 0);
+
+      expect(() => validator({ value, customArgs: { date: void 0 } })).toThrow(
+        Error
+      );
+      expect(() =>
+        validator({ value, customArgs: { date: void 0 } })
+      ).toThrowError(
+        'FieldValidationError: date custom arg is mandatory. Example: { customArgs: { date: new Date() } }.'
+      );
+    });
+
+    it('Should throw an error if value is string and customArgs.parseStringToDate is not provided', () => {
+      const value = '2019-11-06';
+
+      expect(() =>
+        validator({
+          value,
+          customArgs: { date: new Date(), parseStringToDate: void 0 },
+        })
+      ).toThrow(Error);
+      expect(() =>
+        validator({
+          value,
+          customArgs: { date: new Date(), parseStringToDate: void 0 },
+        })
+      ).toThrowError(
+        'FieldValidationError: parseStringToDate custom arg is mandatory when value is string. Example: { customArgs: { parseStringToDate: (value) => new Date(value) } }.'
       );
     });
   });

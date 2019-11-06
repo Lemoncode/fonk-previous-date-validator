@@ -30,7 +30,7 @@ export const setErrorMessage = message => (defaultMessage = message);
 
 const isDefined = value => value !== void 0 && value !== null && value !== '';
 
-const isString = value => value === typeof 'string';
+const isString = value => typeof value === 'string';
 
 const parseToDate = (value, { parseStringToDate }: CustomArgs) => {
   if (!parseStringToDate) {
@@ -45,7 +45,7 @@ export const validator: FieldValidationFunctionSync<CustomArgs> = ({
   message = defaultMessage,
   customArgs,
 }) => {
-  if (!customArgs) {
+  if (!customArgs || !customArgs.date) {
     throw new Error(MISSING_DATE_ARGS);
   }
 
