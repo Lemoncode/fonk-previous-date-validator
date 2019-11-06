@@ -43,17 +43,20 @@ const parseToDate = (value, { parseStringToDate }: CustomArgs) => {
 export const validator: FieldValidationFunctionSync<CustomArgs> = ({
   value,
   message = defaultMessage,
-  customArgs,
+  customArgs = defaultCustomArgs,
 }) => {
-  if (!customArgs || !customArgs.date) {
+  const args: CustomArgs = {
+    ...defaultCustomArgs,
+    ...customArgs,
+  };
+
+  if (!args || !args.date) {
     throw new Error(MISSING_DATE_ARGS);
   }
 
-  const { date } = customArgs;
+  const valueAsDate = isString(value) ? parseToDate(value, args) : value;
 
-  const valueAsDate = isString(value) ? parseToDate(value, customArgs) : value;
-
-  const succeeded = !isDefined(value) || valueAsDate < date;
+  const succeeded = !isDefined(value) || valueAsDate < args.date;
 
   return {
     succeeded,
