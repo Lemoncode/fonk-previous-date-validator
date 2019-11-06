@@ -282,7 +282,7 @@ describe('fonk-previous-date-validator specs', () => {
       const value = '';
       const customArgs = {
         date: new Date(2018, 11, 30, 15, 33, 30, 0),
-        parseStringToDate: (value: string) => new Date(value),
+        parseStringToDateFn: (value: string) => new Date(value),
       };
 
       const result = validator({ value, customArgs });
@@ -298,7 +298,7 @@ describe('fonk-previous-date-validator specs', () => {
       const value = 'test1234';
       const customArgs = {
         date: new Date('2018-11-30T15:30:00'),
-        parseStringToDate: (value: string) => new Date(value),
+        parseStringToDateFn: (value: string) => new Date(value),
       };
 
       const result = validator({ value, customArgs });
@@ -314,7 +314,7 @@ describe('fonk-previous-date-validator specs', () => {
       const value = '14:00:00 30-11-2018';
       const customArgs = {
         date: new Date('2018-11-30T15:30:00'),
-        parseStringToDate: (value: string) => new Date(value),
+        parseStringToDateFn: (value: string) => new Date(value),
       };
 
       const result = validator({ value, customArgs });
@@ -330,7 +330,7 @@ describe('fonk-previous-date-validator specs', () => {
       const value = '2018-11-30 16:00:00';
       const customArgs = {
         date: new Date('2018-11-30T15:30:00'),
-        parseStringToDate: (value: string) => new Date(value),
+        parseStringToDateFn: (value: string) => new Date(value),
       };
 
       const result = validator({ value, customArgs });
@@ -346,7 +346,7 @@ describe('fonk-previous-date-validator specs', () => {
       const value = '2018-11-30 14:00:00';
       const customArgs = {
         date: new Date('2018-11-30T15:30:00'),
-        parseStringToDate: (value: string) => new Date(value),
+        parseStringToDateFn: (value: string) => new Date(value),
       };
 
       const result = validator({ value, customArgs });
@@ -412,22 +412,22 @@ describe('fonk-previous-date-validator specs', () => {
       );
     });
 
-    it('Should throw an error if value is string and customArgs.parseStringToDate is not provided', () => {
+    it('Should throw an error if value is string and customArgs.parseStringToDateFn is not provided', () => {
       const value = '2019-11-06';
 
       expect(() =>
         validator({
           value,
-          customArgs: { date: new Date(), parseStringToDate: void 0 },
+          customArgs: { date: new Date(), parseStringToDateFn: void 0 },
         })
       ).toThrow(Error);
       expect(() =>
         validator({
           value,
-          customArgs: { date: new Date(), parseStringToDate: void 0 },
+          customArgs: { date: new Date(), parseStringToDateFn: void 0 },
         })
       ).toThrowError(
-        'FieldValidationError: parseStringToDate custom arg is mandatory when value is string. Example: { customArgs: { parseStringToDate: (value) => new Date(value) } }.'
+        'FieldValidationError: parseStringToDateFn custom arg is mandatory when value is string. Example: { customArgs: { parseStringToDateFn: (value) => new Date(value) } }.'
       );
     });
   });

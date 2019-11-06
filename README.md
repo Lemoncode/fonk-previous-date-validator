@@ -70,7 +70,7 @@ const validationSchema = {
 };
 ```
 
-This validator compare [Date](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Date) values. If your model use dates as string format, you can provide the `parseStringToDate` method.
+This validator compare [Date](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Date) values. If your model use dates as string format, you can provide the `parseStringToDateFn` method.
 
 ```javascript
 import { previousDate } from '@lemoncode/fonk-previous-date-validator';
@@ -82,7 +82,7 @@ const validationSchema = {
         validator: previousDate.validator,
         customArgs: {
           date: new Date('2019-03-10T00:00:00'),
-          parseStringToDate: value => new Date(value),
+          parseStringToDateFn: value => new Date(value),
         },
       },
     ],
@@ -103,8 +103,8 @@ const validationSchema = {
         validator: previousDate.validator,
         customArgs: {
           date: new Date('2019-03-10T00:00:00'),
--         parseStringToDate: value => new Date(value),
-+         parseStringToDate: value => parse(value, 'yyyy-MM-dd HH:mm:ss', new Date()),
+-         parseStringToDateFn: value => new Date(value),
++         parseStringToDateFn: value => parse(value, 'yyyy-MM-dd HH:mm:ss', new Date()),
         },
       },
     ],
@@ -126,7 +126,7 @@ const validationSchema = {
         validator: previousDate.validator,
         customArgs: {
           date: new Date('2019-03-10'),
-          parseStringToDate: value => new Date(value),
+          parseStringToDateFn: value => new Date(value),
         },
       },
     ],
@@ -139,7 +139,7 @@ const validationSchema = {
 ```javascript
 import { previousDate } from '@lemoncode/fonk-previous-date-validator';
 
-previousDate.setCustomArgs({ parseStringToDate: (value) => new Date(value) ) });
+previousDate.setCustomArgs({ parseStringToDateFn: (value) => new Date(value) ) });
 
 // OR
 
@@ -147,7 +147,7 @@ previousDate.setCustomArgs({ date: new Date() });
 
 // OR
 
-previousDate.setCustomArgs({ date: new Date(), parseStringToDate: (value) => new Date(value) ) });
+previousDate.setCustomArgs({ date: new Date(), parseStringToDateFn: (value) => new Date(value) ) });
 
 ```
 
