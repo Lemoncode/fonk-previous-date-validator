@@ -70,6 +70,87 @@ const validationSchema = {
 };
 ```
 
+This validator compare [Date](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Date) values. If your model use dates as string format, you can provide the `parseStringToDateFn` method.
+
+```javascript
+import { previousDate } from '@lemoncode/fonk-previous-date-validator';
+
+const validationSchema = {
+  field: {
+    purchaseDate: [
+      {
+        validator: previousDate.validator,
+        customArgs: {
+          date: new Date('2019-03-10T00:00:00'),
+          parseStringToDateFn: value => new Date(value),
+        },
+      },
+    ],
+  },
+};
+```
+
+Or if you are using some third party library like _moment_, _date-fns_, etc:
+
+```diff
+import { previousDate } from '@lemoncode/fonk-previous-date-validator';
++ import parse from 'date-fns/parse'
+
+const validationSchema = {
+  field: {
+    purchaseDate: [
+      {
+        validator: previousDate.validator,
+        customArgs: {
+          date: new Date('2019-03-10T00:00:00'),
+-         parseStringToDateFn: value => new Date(value),
++         parseStringToDateFn: value => parse(value, 'yyyy-MM-dd HH:mm:ss', new Date()),
+        },
+      },
+    ],
+  },
+};
+```
+
+You can specify the custom arguments in two ways:
+
+- Locally just customize the arguments for this validationSchema:
+
+```javascript
+import { previousDate } from '@lemoncode/fonk-previous-date-validator';
+
+const validationSchema = {
+  field: {
+    purchaseDate: [
+      {
+        validator: previousDate.validator,
+        customArgs: {
+          date: new Date('2019-03-10'),
+          parseStringToDateFn: value => new Date(value),
+        },
+      },
+    ],
+  },
+};
+```
+
+- Globally, replace the default custom arguments in all validationSchemas (e.g. enable strict types):
+
+```javascript
+import { previousDate } from '@lemoncode/fonk-previous-date-validator';
+
+previousDate.setCustomArgs({ parseStringToDateFn: (value) => new Date(value) ) });
+
+// OR
+
+previousDate.setCustomArgs({ date: new Date() });
+
+// OR
+
+previousDate.setCustomArgs({ date: new Date(), parseStringToDateFn: (value) => new Date(value) ) });
+
+```
+
 Please, refer to [fonk](https://github.com/Lemoncode/fonk) to know more.
 
 ## License
