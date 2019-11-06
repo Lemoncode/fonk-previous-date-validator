@@ -324,7 +324,7 @@ describe('fonk-previous-date-validator specs', () => {
 
       expect(() => validator(validatorArgs)).toThrow(Error);
       expect(() => validator(validatorArgs)).toThrowError(
-        'FieldValidationError: date option for date validation is mandatory. Example: { date: new Date() }.'
+        'FieldValidationError: date custom arg is mandatory. Example: { customArgs: { date: new Date() } }.'
       );
     });
   });

@@ -7,15 +7,38 @@ const VALIDATOR_TYPE = 'PREVIOUS_DATE';
 
 export interface CustomArgs {
   date: Date;
+  parseStringToDate?: (value: string) => Date;
 }
 
-const MISSING_ARGS =
-  'FieldValidationError: date option for date validation is mandatory. Example: { date: new Date() }.';
+let defaultCustomArgs: CustomArgs = {
+  date: void 0,
+  parseStringToDate: void 0,
+};
+
+export const setCustomArgs = (customArgs: Partial<CustomArgs>) => {
+  defaultCustomArgs = { ...defaultCustomArgs, ...customArgs };
+};
+
+const MISSING_DATE_ARGS =
+  'FieldValidationError: date custom arg is mandatory. Example: { customArgs: { date: new Date() } }.';
+
+const MISSING_PARSE_ARGS =
+  'FieldValidationError: parseStringToDate custom arg is mandatory when value is string. Example: { customArgs: { parseStringToDate: (value) => new Date(value) } }.';
 
 let defaultMessage = "Date isn't previous to the one provided.";
 export const setErrorMessage = message => (defaultMessage = message);
 
 const isDefined = value => value !== void 0 && value !== null && value !== '';
+
+const isString = value => value === typeof 'string';
+
+const parseToDate = (value, { parseStringToDate }: CustomArgs) => {
+  if (!parseStringToDate) {
+    throw new Error(MISSING_PARSE_ARGS);
+  }
+
+  return parseStringToDate(value);
+};
 
 export const validator: FieldValidationFunctionSync<CustomArgs> = ({
   value,
@@ -23,12 +46,14 @@ export const validator: FieldValidationFunctionSync<CustomArgs> = ({
   customArgs,
 }) => {
   if (!customArgs) {
-    throw new Error(MISSING_ARGS);
+    throw new Error(MISSING_DATE_ARGS);
   }
 
   const { date } = customArgs;
 
-  const succeeded = !isDefined(value) || value < date;
+  const valueAsDate = isString(value) ? parseToDate(value, customArgs) : value;
+
+  const succeeded = !isDefined(value) || valueAsDate < date;
 
   return {
     succeeded,
