@@ -1,6 +1,6 @@
 {
   "name": "@lemoncode/fonk-previous-date-validator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Update description: This is a [fonk](https://github.com/Lemoncode/fonk) microlibrary that brings validation capabilities to validate if a field of a form is previous to a certain date",
   "main": "dist/@lemoncode/fonk-previous-date-validator.cjs.js",
   "module": "dist/@lemoncode/fonk-previous-date-validator.esm.js",
