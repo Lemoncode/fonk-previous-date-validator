@@ -167,7 +167,11 @@ previousDate.setCustomArgs({ date: new Date() });
 
 // OR
 
-previousDate.setCustomArgs({ date: new Date(), parseStringToDateFn: (value) => new Date(value) ) });
+previousDate.setCustomArgs({ inclusive: true });
+
+// OR
+
+previousDate.setCustomArgs({ date: new Date(), parseStringToDateFn: (value) => new Date(value)), inclusive: true });
 
 ```
 
