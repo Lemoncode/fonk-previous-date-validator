@@ -33,7 +33,6 @@ export interface CustomArgs {
   parseStringToDateFn?: (value: string) => Date;
   inclusive?: boolean;
 }
-
 ```
 
 These are the default arguments:
@@ -44,7 +43,6 @@ let defaultCustomArgs: CustomArgs = {
   parseStringToDateFn: null,
   inclusive: false,
 };
-
 ```
 
 We can add a previousDate validation to the myFormValues
