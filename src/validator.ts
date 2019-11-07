@@ -8,11 +8,13 @@ const VALIDATOR_TYPE = 'PREVIOUS_DATE';
 export interface CustomArgs {
   date: Date;
   parseStringToDateFn?: (value: string) => Date;
+  inclusive?: boolean;
 }
 
 let defaultCustomArgs: CustomArgs = {
-  date: void 0,
-  parseStringToDateFn: void 0,
+  date: null,
+  parseStringToDateFn: null,
+  inclusive: false,
 };
 
 export const setCustomArgs = (customArgs: Partial<CustomArgs>) => {
@@ -40,6 +42,9 @@ const parseToDate = (value, { parseStringToDateFn }: CustomArgs) => {
   return parseStringToDateFn(value);
 };
 
+const isValid = (value: Date, customArgs: CustomArgs) =>
+  customArgs.inclusive ? value <= customArgs.date : value < customArgs.date;
+
 export const validator: FieldValidationFunctionSync<CustomArgs> = ({
   value,
   message = defaultMessage,
@@ -56,13 +61,13 @@ export const validator: FieldValidationFunctionSync<CustomArgs> = ({
 
   const valueAsDate = isString(value) ? parseToDate(value, args) : value;
 
-  const succeeded = !isDefined(value) || valueAsDate < args.date;
+  const succeeded = !isDefined(value) || isValid(valueAsDate, args);
 
   return {
     succeeded,
     message: succeeded
       ? ''
-      : parseMessageWithCustomArgs(message as string, customArgs),
+      : parseMessageWithCustomArgs(message as string, args),
     type: VALIDATOR_TYPE,
   };
 };

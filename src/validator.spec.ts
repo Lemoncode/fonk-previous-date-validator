@@ -358,6 +358,40 @@ describe('fonk-previous-date-validator specs', () => {
       });
     });
 
+    it('should return failed validation when it feeds inclusive equals false, value equals string with valid format date and is same date', () => {
+      const value = '2018-11-30 14:00:00';
+      const customArgs = {
+        date: new Date('2018-11-30T14:00:00'),
+        parseStringToDateFn: (value: string) => new Date(value),
+        inclusive: false,
+      };
+
+      const result = validator({ value, customArgs });
+
+      expect(result).toEqual({
+        succeeded: false,
+        message: VALIDATOR_MESSAGE,
+        type: VALIDATOR_TYPE,
+      });
+    });
+
+    it('should return succeeded validation when it feeds inclusive equals true, value equals string with valid format date and is same date', () => {
+      const value = '2018-11-30 14:00:00';
+      const customArgs = {
+        date: new Date('2018-11-30T14:00:00'),
+        parseStringToDateFn: (value: string) => new Date(value),
+        inclusive: true,
+      };
+
+      const result = validator({ value, customArgs });
+
+      expect(result).toEqual({
+        succeeded: true,
+        message: '',
+        type: VALIDATOR_TYPE,
+      });
+    });
+
     it('should overwrite default message when it feeds value and message', () => {
       const value = new Date(2020, 11, 24, 10, 33, 30, 0);
       const date = new Date(2018, 11, 30, 15, 33, 30, 0);

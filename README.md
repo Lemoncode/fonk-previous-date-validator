@@ -25,6 +25,28 @@ const myFormValues = {
 }
 ```
 
+The validator must be configured with the following required arguments:
+
+```javascript
+export interface CustomArgs {
+  date: Date;
+  parseStringToDateFn?: (value: string) => Date;
+  inclusive?: boolean;
+}
+
+```
+
+These are the default arguments:
+
+```javascript
+let defaultCustomArgs: CustomArgs = {
+  date: null,
+  parseStringToDateFn: null,
+  inclusive: false,
+};
+
+```
+
 We can add a previousDate validation to the myFormValues
 
 ```javascript
